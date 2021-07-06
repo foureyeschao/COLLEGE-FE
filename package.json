@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.1.2",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -10,18 +13,24 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "antd": "^4.16.3",
+    "axios": "^0.21.1",
+    "craco-less": "^1.17.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
-    "json-server": "json-server __json_server_mock__/db.json --watch"
+    "json-server": "json-server --watch -c __json_server_mock__/jserver.json __json_server_mock__/db.json"
   },
   "eslintConfig": {
     "extends": [

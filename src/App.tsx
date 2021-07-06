@@ -1,10 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { Auth } from 'views/auth'
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <Auth />
+    </div>
   );
 }
 

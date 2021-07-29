@@ -1,8 +1,13 @@
 export interface User {
-  id: string;
-  name: string;
+  userId: number;
+  username: string;
   email: string;
-  title: string;
-  organization: string;
+  address: string;
   token: string;
+  state: number;
+}
+
+export interface AuthForm {
+  username: string;
+  password: string;
 }

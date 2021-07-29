@@ -5,20 +5,20 @@ import styled from "@emotion/styled";
 import logo from 'assets/MCollegeLogo1.svg'
 
 
-export const Auth = () => {
+export const UnauthenticatedApp = () => {
 
-  return (
-    <Container>
-      <Header />
-      <ShadowCard>
-        <Typography.Title level={4}>
-          Login
-        </Typography.Title>
-        <Login />
-      </ShadowCard>
-    </Container>
-  );
-};
+   return (
+      <Container>
+         <Header />
+         <ShadowCard>
+            <Typography.Title level={4}>
+               Login
+            </Typography.Title>
+            <Login />
+         </ShadowCard>
+      </Container>
+   );
+}
 
 const Container = styled.div`
   display: flex;

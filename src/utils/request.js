@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { config } from 'config'
+import config from 'config'
 import { message } from 'antd'
 
 const TOKEN_INVALID = "Token is invalid, please sign in"
 const NETWORK_ERROR = "The network request is abnormal, please try again later"
 
 const service = axios.create({
-  baseURL: config.baseAPI,
+  baseURL: config.mockApi,
   timeout: 8000,
 })
 
@@ -18,7 +18,7 @@ service.interceptors.request.use((req) => {
 })
 
 service.interceptors.response.use((res) => {
-  const { code, data, msg } = res.data[0]
+  const { code, data, msg } = res.data
   if (code === 200) {
     return data
   } else if (code === 40001) {
@@ -38,5 +38,16 @@ const request = (options) => {
   }
   return service(options)
 }
+
+['get','post','put','delete','patch'].forEach((item) => {
+  request[item] = (url,data,options) => {
+    return request({
+      url,
+      data,
+      method:item,
+      ...options
+    })
+  }
+})
 
 export default request

@@ -2,17 +2,10 @@ import React from "react";
 import { Form, Input, Button, Checkbox, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from '@emotion/styled'
-import { useApi, useFetch } from 'utils/hooks'
-import request from 'utils/request';
 import { useAuth } from 'context/auth-context';
 
 export const Login: React.FC = () => {
-  const { login, user } = useAuth()
-  /*   const apis = useApi()
-    const { loading, data } = useFetch(apis.user.getLogin({ userName: 'victorcao', password: '' }))
-  
-    console.log(loading)
-    console.log(data) */
+  const { login } = useAuth()
 
   const handleSubmit = (values: { username: string, password: string }) => {
     login(values);
@@ -23,11 +16,7 @@ export const Login: React.FC = () => {
       className="login-form"
       initialValues={{ remember: true }}
       onFinish={handleSubmit}
-    >{
-        user ? <div>
-          Login success! UserName: {user.username}
-        </div> : null
-      }
+    >
       <Form.Item
         name="username"
         rules={[{ required: true, message: "Please input your Username!" }]}

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const HomePage = () => {
-  return;
-  <div> HomePage </div>;
+export const HomePage:React.FC= () => {
+  
+  return <div> HomePage </div>;
 };

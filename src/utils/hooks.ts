@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ApiConfig } from "api";
-import { nameSpace } from "api";
+import { ApiConfig, nameSpace } from "api";
+import { State } from "utils/interfaceCollections";
 // import request from './request'
 
 export const useApi = () => {
@@ -34,3 +34,35 @@ export const useMount = (callback: () => void) => {
     callback();
   }, []);
 };
+
+// useAsync hook
+const defaultInitialState: State<null> = {
+  stat: "idle",
+  data: null,
+  error: null,
+};
+export const useAsync = <D>(initialState?: State<D>) => {
+  const [state, setState] = useState<State<D>>({
+    ...defaultInitialState,
+    ...initialState,
+  });
+
+  const setData = (data: D) =>
+    setState({
+      stat: "success",
+      data,
+      error: null,
+    });
+
+  const setError = (error: Error) =>
+    setState({
+      stat: "error",
+      data: null,
+      error,
+    });
+
+  const run = (promise: Promise<D>) => {};
+};
+
+export const resetRoute = () =>
+  (window.location.href = window.location.origin + "/groups");

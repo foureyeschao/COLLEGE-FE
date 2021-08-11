@@ -1,5 +1,5 @@
 import React from "react";
-import { Login } from "views/auth/Login";
+import { Login } from "unauthenticated-app/login";
 import { Card, Typography } from "antd";
 import styled from "@emotion/styled";
 import logo from 'assets/MCollegeLogo1.svg'

@@ -6,9 +6,9 @@ import { useAuth } from 'context/auth-context';
 
 export const Login: React.FC = () => {
   const { login } = useAuth()
-
   const handleSubmit = (values: { username: string, password: string }) => {
-    login(values);
+    login(values)
+
   }
   return (
     <Form

@@ -24,11 +24,12 @@ export const login = (data: { username: string; password: string }) => {
     if (response.data.data.verifySuccess) {
       return handleUserResponse(response.data.data.user);
     } else {
-      alert("Invalid username or password.");
+      alert("Invalid username or password.!");
       return Promise.reject(data);
     }
   });
 };
 
-export const logout = async () =>
+export const logout = async () => {
   window.localStorage.removeItem(localStorageKey);
+};

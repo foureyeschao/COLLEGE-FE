@@ -2,8 +2,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { PageHeader } from 'components/page-header'
 import { HomePage } from 'views/home/HomePage'
-import { GroupScreen } from 'views/group/'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { GroupInfo } from 'views/group/group-info'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
 export const AuthenticatedApp = () => {
   return (
@@ -12,9 +12,10 @@ export const AuthenticatedApp = () => {
       <Main>
         <Router>
           <Switch>
-            <Route exact path={'/'} component={HomePage} />
+
             <Route exact path={'/groups'} component={HomePage} />
-            <Route exact path={'/groups/:groupId'} component={GroupScreen} />
+            <Route exact path={'/groups/:groupId'} component={GroupInfo} />
+            <Redirect to={'/groups'} />
           </Switch>
         </Router>
       </Main>

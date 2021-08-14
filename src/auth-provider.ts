@@ -19,13 +19,11 @@ export const login = (data: { username: string; password: string }) => {
       "Content-Type": "application/json",
     },
     data: data,
-  }).then((response) => {
-    console.log(response.data);
+  }).then(async (response) => {
     if (response.data.data.verifySuccess) {
-      return handleUserResponse(response.data.data.user);
+      return handleUserResponse(await response.data.data.user);
     } else {
-      alert("Invalid username or password.!");
-      return Promise.reject(data);
+      return Promise.reject(response.data.data.user);
     }
   });
 };

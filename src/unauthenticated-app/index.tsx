@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Login } from "unauthenticated-app/login";
 import { Card, Typography } from "antd";
 import styled from "@emotion/styled";
@@ -6,7 +6,7 @@ import logo from 'assets/MCollegeLogo1.svg'
 
 
 export const UnauthenticatedApp = () => {
-
+  const [error,setError] = useState<Error | null>(null)
    return (
       <Container>
          <Header />
@@ -14,7 +14,8 @@ export const UnauthenticatedApp = () => {
             <Typography.Title level={4}>
                Login
             </Typography.Title>
-            <Login />
+            {error ? <Typography.Text type={'danger'}>{error}</Typography.Text>:null}
+            <Login onError={setError} />
          </ShadowCard>
       </Container>
    );

@@ -61,7 +61,31 @@ export const useAsync = <D>(initialState?: State<D>) => {
       error,
     });
 
-  const run = (promise: Promise<D>) => {};
+  const run = (promise: Promise<D>) => {
+    if (!promise || !promise.then) {
+      throw new Error("Please send a Promise data ");
+    }
+    setState({ ...state, stat: "loading" });
+    return promise
+      .then((data) => {
+        setData(data);
+        return data;
+      })
+      .catch((error) => {
+        setError(error);
+        return Promise.reject(error);
+      });
+  };
+  return {
+    isIdle: state.stat === "idle",
+    isLoading: state.stat === "loading",
+    isError: state.stat === "error",
+    isSuccess: state.stat === "success",
+    run,
+    setData,
+    setError,
+    ...state,
+  };
 };
 
 export const resetRoute = () =>

@@ -2,7 +2,8 @@ import React, { ReactNode, useState } from 'react'
 import { AuthForm, User } from 'utils/interfaceCollections'
 import * as auth from 'auth-provider'
 import { http } from "utils/http"
-import { useMount } from 'utils/hooks'
+import { useAsync, useMount } from 'utils/hooks'
+import { FullPageLoading } from 'components/lib'
 
 const bootstrapUser = async () => {
   let user = null
@@ -21,13 +22,18 @@ const AuthContext = React.createContext<{
 } | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const {data:user,error,isLoading,isIdle,isError,run,setData:setUser} = useAsync<User | null>()
+  
   const login = (form: AuthForm) => auth.login(form).then(setUser)
   const logout = () => auth.logout().then(() => setUser(null))
 
   useMount(() => {
-    bootstrapUser().then(setUser)
+    run(bootstrapUser()) 
   })
+
+  if(isIdle || isLoading){
+    return <FullPageLoading />
+  }
   return <AuthContext.Provider children={children} value={{ user, login, logout }} />
 }
 

@@ -3,11 +3,19 @@ import { Form, Input, Button, Checkbox, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from '@emotion/styled'
 import { useAuth } from 'context/auth-context';
+import { useAsync } from 'utils/hooks';
 
-export const Login: React.FC = () => {
+export const Login = ({ onError }: { onError: (error: Error) => void }) => {
   const { login } = useAuth()
-  const handleSubmit = (values: { username: string, password: string }) => {
-    login(values)
+  const { run, isLoading } = useAsync()
+  const handleSubmit = async (values: { username: string, password: string }) => {
+
+    try {
+      await run(login(values))
+
+    } catch (e) {
+      onError(e)
+    }
 
   }
   return (
@@ -45,7 +53,7 @@ export const Login: React.FC = () => {
       </Form.Item>
 
       <Form.Item>
-        <SubmitButton type="primary" htmlType="submit">
+        <SubmitButton loading={isLoading} type="primary" htmlType="submit">
           Log in
         </SubmitButton>
         <Divider />

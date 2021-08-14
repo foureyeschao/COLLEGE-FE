@@ -17,7 +17,6 @@ export const AuthenticatedApp = () => {
             <Route exact path={'/groups/:groupId'} component={GroupScreen} />
           </Switch>
         </Router>
-        {/* <Route path={'/group/:groupId/*'} element={<GroupScreen />} /> */}
       </Main>
     </Container>
   )

@@ -48,3 +48,30 @@ export const data = [
     ],
   },
 ];
+
+export const students = [
+  {
+    id: "101",
+    groupId: "10016",
+    firstName: "Lucas si yu",
+    lastName: "Cao",
+    age: 11,
+    gender: "male",
+  },
+  {
+    id: "102",
+    groupId: "10011",
+    firstName: "Alex si meng",
+    lastName: "Li",
+    age: 10,
+    gender: "male",
+  },
+  {
+    id: "103",
+    groupId: "10002",
+    firstName: "Ethan si wei",
+    lastName: "Cao",
+    age: 7,
+    gender: "male",
+  },
+];

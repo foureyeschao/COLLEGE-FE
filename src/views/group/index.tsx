@@ -4,6 +4,7 @@ import config from 'config'
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useMount } from 'utils/hooks';
+import { StudentList } from './students-list';
 
 interface IParam {
   groupId: string;
@@ -39,7 +40,7 @@ export const GroupScreen = () => {
   return (
     <Container>
       <h2>Group List</h2>
-      <GroupScreen group={group} />
+      <StudentList students={group?.students} />
       {/*          <table>
             <thead>
                <tr>

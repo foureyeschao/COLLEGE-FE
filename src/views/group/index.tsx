@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import axios from 'axios'
 import config from 'config'
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useMount } from 'utils/hooks';
-import { StudentList } from './students-list';
+import { Row } from 'components/lib'
+import { StudentList, StudentsProps } from './students-list';
 
 interface IParam {
   groupId: string;
@@ -14,14 +15,14 @@ interface IGroups {
   id: string;
   name: string;
   responsable: string;
-  students: { id: string, firstname: string, lastname: string, age: number }[];
+  students: { student: StudentsProps[] }
+};
 
-}
 
 
 export const GroupScreen = () => {
   const { groupId } = useParams<IParam>()
-  const [group, setGroup] = useState<IGroups | null>(null)
+  const [group, setGroup] = useState<IGroups>()
 
   useMount(() => {
     axios({
@@ -34,29 +35,21 @@ export const GroupScreen = () => {
       console.log('log:', response.data.data.result[0])
       const res = response.data.data.result[0]
       setGroup(res)
+
     })
   })
-
+  console.log(group)
   return (
     <Container>
-      <h2>Group List</h2>
-      <StudentList students={group?.students} />
-      {/*          <table>
-            <thead>
-               <tr>
-                  <th>Group</th>
-                  <th>Responsable</th>
-                  <th>Local</th>
-                  <th>Remaining</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>{group?.name}</td>
-                  <td>{group?.responsable}</td>
-               </tr>
-            </tbody>
-         </table> */}
+      <Header between={true}>
+      <HeaderLeft gap={false}>
+        <h3>Group {group?.name}</h3>
+      </HeaderLeft>
+      <HeaderRight gap={true} >
+        <h3>Responsable: {group?.responsable}</h3>
+      </HeaderRight>
+    </Header>
+      <StudentList students={group!?.students.student} />
     </Container>)
 
 
@@ -64,4 +57,14 @@ export const GroupScreen = () => {
 
 const Container = styled.div`
 padding: 1.2rem
+`
+
+const Header = styled(Row)`
+ margin-bottom: 2rem;
+`
+const HeaderLeft = styled(Row)`
+ 
+`
+const HeaderRight = styled(Row)`
+align-items: center;
 `
